@@ -7,8 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -t server:latest .
-      - run: docker run --rm server:latest
+      - name: Build dockerfile
+        run: docker build -t server:latest .
+      - name: Run docker image
+        run: docker run --rm server:latest
+      - name: Install dependencies
+        run: pip install -r requirements.txt
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
