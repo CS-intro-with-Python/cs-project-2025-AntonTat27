@@ -1,0 +1,16 @@
+name: Python
+
+on: [push, pull_request]
+
+jobs:
+  Client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t server:latest .
+      - run: docker run --rm server:latest
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - run:
+          python client.py
