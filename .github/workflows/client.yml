@@ -12,17 +12,16 @@ jobs:
         run: docker build -t server:latest .
 
       - name: Run docker image
-        run: docker run --rm server:latest
-  Client:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+        run: docker run -d -p --rm server:latest
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install requests
 
-      - uses: actions/setup-python@v6
+      - name: Set up Python
+        uses: actions/setup-python@v6
         with:
           python-version: '3.13'
-      - run:
+
+      - name: Run client
+        run:
           python client.py
