@@ -14,13 +14,13 @@ jobs:
       - name: Run docker image
         run: docker run -d -p 8080:8080 --rm server:latest
 
-      - name: Install dependencies
-        run: pip install requests
-
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: '3.13'
+
+      - name: Install dependencies
+        run: pip install requests
 
       - name: Run client
         run:
