@@ -18,4 +18,9 @@ jobs:
 
 
       - name: Run client
-        run: docker exec project python client.py
+        run: |
+          out=$(docker exec project python client.py || true)
+          if echo "$out" | grep -qi "Success"; then
+            echo "::notice::$out"; printf "\033[32m SUCCESS"
+          else
+            echo "::error::$out"; printf "\033[31m ERROR"
