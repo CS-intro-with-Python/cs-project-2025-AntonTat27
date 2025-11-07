@@ -12,7 +12,10 @@ jobs:
         run: docker build -t server:latest .
 
       - name: Run docker image
-        run: docker run --name project -d -p 8080:8080 --rm server:latest
+        run: | 
+          docker run --name project -d -p 8080:8080 --rm server:latest
+          sleep 5
+
 
       - name: Run client
         run: docker exec project python client.py
