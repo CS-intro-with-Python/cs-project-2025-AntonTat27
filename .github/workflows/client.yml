@@ -19,11 +19,5 @@ jobs:
         with:
           python-version: '3.13'
 
-      - name: Open bash
-        run: docker exec -it project bash
-
-      - name: Install dependencies
-        run: pip install requests
-
       - name: Run client
-        run: python client.py
+        run: docker exec server python client.py
