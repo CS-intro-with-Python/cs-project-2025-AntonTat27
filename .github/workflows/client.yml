@@ -20,4 +20,4 @@ jobs:
           python-version: '3.13'
 
       - name: Run client
-        run: docker exec server python client.py
+        run: docker exec project python client.py
