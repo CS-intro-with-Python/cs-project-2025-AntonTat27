@@ -14,10 +14,5 @@ jobs:
       - name: Run docker image
         run: docker run --name project -d -p 8080:8080 --rm server:latest
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.13'
-
       - name: Run client
         run: docker exec project python client.py
