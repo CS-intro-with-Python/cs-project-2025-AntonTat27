@@ -12,16 +12,18 @@ jobs:
         run: docker build -t server:latest .
 
       - name: Run docker image
-        run: docker run -d -p 8080:8080 --rm server:latest
+        run: docker run --name project -d -p 8080:8080 --rm server:latest
 
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: '3.13'
 
+      - name: Open bash
+        run: docker exec -it project bash
+
       - name: Install dependencies
         run: pip install requests
 
       - name: Run client
-        run:
-          python client.py
+        run: python client.py

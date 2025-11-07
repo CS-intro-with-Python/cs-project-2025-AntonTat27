@@ -5,10 +5,7 @@ WORKDIR /app
 COPY . /app
 # Copy files from . (local) to /app (in image)
 RUN pip install -r requirements.txt
-# you want to execute in image
-# you can use several RUN
-# example: RUN pip install -r requirements.txt
-ENTRYPOINT ["python", "server.py"]
-# Specifies the default command to be executed
-# when the container starts. Cannot be replaced
-# example: ENTRYPOINT ["python", "server.py"]
+
+ENV FLASK_RUN_RELOAD=true
+
+ENTRYPOINT ["flask", "--app", "app/server.py", "run", "-h", "0.0.0.0", "-p", "8080"]
